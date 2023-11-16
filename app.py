@@ -7,8 +7,7 @@ import logging
 import asyncio
 import html
 import logging
-from dataclasses import dataclass
-from http import HTTPStatus
+
 
 import uvicorn
 from starlette.applications import Starlette
@@ -17,7 +16,7 @@ from starlette.responses import PlainTextResponse, Response
 from starlette.routing import Route
 
 from telegram import Update
-from telegram.constants import ParseMode
+
 from telegram.ext import (
     Application,
     CallbackContext,
