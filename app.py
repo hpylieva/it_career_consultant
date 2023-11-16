@@ -32,7 +32,7 @@ load_dotenv()
 # Define configuration constants
 URL = os.getenv("WEBHOOK")
 # ADMIN_CHAT_ID = 123456
-PORT = 8000
+PORT = int(os.getenv("PORT"))
 # TOKEN = "123:ABC"  # nosec B105
 
 logging.basicConfig(
