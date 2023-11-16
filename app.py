@@ -31,9 +31,8 @@ load_dotenv()
 
 # Define configuration constants
 URL = os.getenv("WEBHOOK")
-# ADMIN_CHAT_ID = 123456
 PORT = int(os.getenv("PORT"))
-# TOKEN = "123:ABC"  # nosec B105
+
 
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -51,7 +50,8 @@ async def interact(update: Update, context: CallbackContext, request):
     headers = {"Authorization": VF_API_KEY}
     data = {"request": request}
     async with httpx.AsyncClient() as client:
-        response = await client.post(url, headers=headers, json=data).json()
+        resp = await client.post(url, headers=headers, json=data)
+        response = resp.json()
     # response = httpx.AsyncClient.post(url, headers=headers, json=data).json()
 
     for trace in response:
