@@ -49,7 +49,7 @@ async def interact(update: Update, context: CallbackContext, request):
     url = f"https://general-runtime.voiceflow.com/state/user/{chat_id}/interact"
     headers = {"Authorization": VF_API_KEY}
     data = {"request": request}
-    async with httpx.AsyncClient() as client:
+    async with httpx.AsyncClient(timeout=60) as client:
         resp = await client.post(url, headers=headers, json=data)
         response = resp.json()
     # response = httpx.AsyncClient.post(url, headers=headers, json=data).json()
