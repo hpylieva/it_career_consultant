@@ -25,7 +25,7 @@ from telegram.ext import (
     ExtBot,
     TypeHandler,
 )
-
+import httpx
 
 load_dotenv()
 
@@ -50,7 +50,9 @@ async def interact(update: Update, context: CallbackContext, request):
     url = f"https://general-runtime.voiceflow.com/state/user/{chat_id}/interact"
     headers = {"Authorization": VF_API_KEY}
     data = {"request": request}
-    response = requests.post(url, headers=headers, json=data).json()
+    async with httpx.AsyncClient() as client:
+        response = await client.post(url, headers=headers, json=data).json()
+    # response = httpx.AsyncClient.post(url, headers=headers, json=data).json()
 
     for trace in response:
         if trace["type"] in ["text", "speak"]:
